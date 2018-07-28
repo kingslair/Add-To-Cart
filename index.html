@@ -77,8 +77,8 @@
   	<script>
 		var categoryList = ["fruits", "vegetables", "dairy"];
 		var fruits = [{"item" : "Apples", "category" : "Fruits" ,"value": 40}, {"item" : "Mangos", "category" : "Fruits" , "value": 20}];
-		var vegetables = [{"item" : "brinjals", "value" : 100}];
-		var dairy = [{"item" : "milk", "value" : 90}];
+		var vegetables = [{"item" : "Brinjals", "category" : "Vegetables" ,"value" : 100}];
+		var dairy = [{"item" : "Milk", "category" : "Dairy", "value" : 90}];
 		var totalListQuantityValue = 0;
 		var orderList = [];
 		
@@ -140,6 +140,7 @@
 			orderList.push(createCurrentOrderJSON);
 		}
 		
+		//fruits products population function
 		function fillFruits() {
 			for(var eachItem=0; eachItem < fruits.length; eachItem++) {
 				let fruit = fruits[eachItem];
@@ -151,16 +152,47 @@
 			}
 		}
 		
+		//vegetables products population function
+		function fillVegetables() {
+			for(var eachItem=0; eachItem < vegetables.length; eachItem++) {
+				let vegetable = vegetables[eachItem];
+				document.getElementById("itemsList").innerHTML += "<tr><td>" + vegetable.item + "</td>" + "<td>" + vegetable.category + "</td>" 
+				+ "<td>" + "<input type='number' style='border: none; border-bottom: 1px solid green;' id=\"" + vegetable.item + "\" name=\"" + vegetable.item + "\" placeholder='click to add value'/>"
+				+ "</td>" + "<td>" + vegetable.value + "</td>" 
+				+ "<td><button class='btn btn-outline-success' style='height: 30px; font-size: 12px;' onclick='addItemToList(\"" + vegetable.item +"\",\"" + vegetable.category +"\",\"" + vegetable.value +"\")'>ADD</button></td>"
+				+ "</tr>";
+			}
+		}
+		
+		//dairy products population function
+		function fillDairy() {
+			console.log(dairy);
+			for(var eachItem=0; eachItem < dairy.length; eachItem++) {
+				let dairys = dairy[eachItem];
+				document.getElementById("itemsList").innerHTML += "<tr><td>" + dairys.item + "</td>" + "<td>" + dairys.category + "</td>" 
+				+ "<td>" + "<input type='number' style='border: none; border-bottom: 1px solid green;' id=\"" + dairys.item + "\" name=\"" + dairys.item + "\" placeholder='click to add value'/>"
+				+ "</td>" + "<td>" + dairys.value + "</td>" 
+				+ "<td><button class='btn btn-outline-success' style='height: 30px; font-size: 12px;' onclick='addItemToList(\"" + dairys.item +"\",\"" + dairys.category +"\",\"" + dairys.value +"\")'>ADD</button></td>"
+				+ "</tr>";
+			}
+		}
+		
 		for(var items=0; items < categoryList.length; items++) {
+			//parsing each category in categoryList
 		    var categoryItems = categoryList[items];
 			switch(categoryItems) {
 				case "fruits":
 					fillFruits();
 					break;
 				case "vegetables":
+					fillVegetables();
 					break;
 				case "dairy":
+					fillDairy();
 					break;
+				//New Elements can be added here
+				//You need to have an matching function like the 
+				//above in that case
 				default:
 					break;
 			}
